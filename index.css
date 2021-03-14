@@ -1,0 +1,17 @@
+@import "./vars/vars.css";
+@import "./blocks/page/page.css";
+@import "./blocks/page/__container/page__container.css";
+@import "./blocks/header/header.css";
+@import "./blocks/header/__logo/header__logo.css";
+@import "./blocks/profile/profile.css";
+@import "./blocks/profile/__add/profile__add.css";
+@import "./blocks/profile/__edit/profile__edit.css";
+@import "./blocks/profile/__avatar/profile__avatar.css";
+@import "./blocks/profile/__info/profile__info.css";
+@import "./blocks/places/places.css";
+@import "./blocks/places/__item/places__item.css";
+@import "./blocks/places/__img/places__img.css";
+@import "./blocks/places/__text-container/places__text-container.css";
+@import "./blocks/popup/popup.css";
+@import "./blocks/popup/__container/popup__container.css";
+@import "./blocks/popup/__close/popup__close.css";

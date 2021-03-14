@@ -1,0 +1,11 @@
+.profile__edit{
+  background-image: url("../../../images/button__edit.svg");
+  background-position: center;
+  background-size: cover;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: transparent;
+  overflow: hidden;
+  outline: none;
+}
