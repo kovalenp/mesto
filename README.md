@@ -19,4 +19,4 @@
 
 ### Демо
 
-[Mesto](https://kovalenp.github.io/mesto/)
+[Mesto](https://kovalenp.github.io/mesto/index.html)
