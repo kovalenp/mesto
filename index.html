@@ -15,7 +15,10 @@
         <section class="profile">
           <img src="./images/avatar.png" alt="Аватар" class="profile__avatar" />
           <div class="profile__info">
-            <h2>Жак Ив Кусто</h2>
+            <div class="profile__user">
+              <h2 class="profile__name">Жак-Ив Кусто</h2>
+              <p class="profile__role">Исследователь океана</p>
+            </div>
             <button class="profile__edit"></button>
           </div>
           <button class="profile__add">
@@ -49,7 +52,26 @@
       <footer></footer>
       <div class="popup">
         <div class="popup__container">
-          <p>Hello</p>
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <form class="popup__form" autocomplete="off">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="popup__text-input"
+            />
+            <input
+              type="text"
+              id="role"
+              name="role"
+              class="popup__text-input"
+            />
+            <input
+              type="submit"
+              value="Сохранить"
+              class="popup__submit-input"
+            />
+          </form>
           <button class="popup__close"></button>
         </div>
       </div>

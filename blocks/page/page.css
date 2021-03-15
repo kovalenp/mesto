@@ -2,8 +2,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: var(--color_background);
-  color: var(--color_text_main);
+  background-color: var(--color_black);
+  color: var(--color_white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

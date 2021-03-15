@@ -1,7 +1,7 @@
 .places__item {
   width: 282px;
   min-height: 361px;
-  background-color: var(--color_text_main);
+  background-color: var(--color_white);
   border-radius: 10px;
   display: flex;
   flex-direction: column;

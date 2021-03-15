@@ -15,3 +15,6 @@
 @import "./blocks/popup/popup.css";
 @import "./blocks/popup/__container/popup__container.css";
 @import "./blocks/popup/__close/popup__close.css";
+@import "./blocks/popup/__form/popup__form.css";
+@import "./blocks/popup/__submit-input/popup__submit-input.css";
+@import "./blocks/popup/__text-input/popup__text-input.css";

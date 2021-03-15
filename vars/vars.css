@@ -1,5 +1,5 @@
 :root {
-  --color_background: #000;
-  --color_text_main: #fff;
-  --color_text_footer: #545454;
+  --color_black: #000;
+  --color_white: #fff;
+  --color_gray: #545454;
 }
