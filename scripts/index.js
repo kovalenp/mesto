@@ -38,7 +38,3 @@ likeButtons.forEach((likeButton) => {
     likeButton.classList.toggle("places__like_active");
   });
 });
-
-// likeButton.addEventListener("click", function () {
-//   likeButton.classList.toggle("places__like_active");
-// });
