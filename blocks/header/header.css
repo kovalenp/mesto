@@ -4,3 +4,10 @@
   border-bottom: 2px gray solid;
   display: flex;
 }
+
+@media screen and (max-width: 670px) {
+  .header {
+    min-height: 56px;
+    margin-top: 28px;
+  }
+}

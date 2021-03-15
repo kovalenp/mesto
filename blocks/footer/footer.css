@@ -1,0 +1,12 @@
+.footer {
+  color: var(--color_gray);
+  margin-top: 67px;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 670px) {
+  .footer {
+    margin-top: 48px;
+    margin-bottom: 36px;
+  }
+}

@@ -1,26 +1,27 @@
-const editButton = document.querySelector('.profile__edit');
-const closeButton = document.querySelector('.popup__close');
+const editButton = document.querySelector(".profile__edit");
+const closeButton = document.querySelector(".popup__close");
+const likeButtons = document.querySelectorAll(".places__like");
 
-const formElement = document.querySelector('.popup__form');
+const formElement = document.querySelector(".popup__form");
 
-const profileName = document.querySelector('.profile__name');
-const profileRole = document.querySelector('.profile__role');
+const profileName = document.querySelector(".profile__name");
+const profileRole = document.querySelector(".profile__role");
 
-const usernameInput = document.querySelector('#username');
-const roleInput = document.querySelector('#role');
+const usernameInput = document.querySelector("#username");
+const roleInput = document.querySelector("#role");
 
-editButton.addEventListener('click', openPopup);
+editButton.addEventListener("click", openPopup);
 
-closeButton.addEventListener('click', closePopup);
+closeButton.addEventListener("click", closePopup);
 
 function openPopup() {
-  document.querySelector('.popup').classList.add('popup_opened');
-  usernameInput.value = profileName.innerText || '';
-  roleInput.value = profileRole.innerText || '';
+  document.querySelector(".popup").classList.add("popup_opened");
+  usernameInput.value = profileName.innerText || "";
+  roleInput.value = profileRole.innerText || "";
 }
 
 function closePopup() {
-  document.querySelector('.popup').classList.remove('popup_opened');
+  document.querySelector(".popup").classList.remove("popup_opened");
 }
 
 function formSubmitHandler(e) {
@@ -30,4 +31,14 @@ function formSubmitHandler(e) {
   closePopup();
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener("submit", formSubmitHandler);
+
+likeButtons.forEach((likeButton) => {
+  likeButton.addEventListener("click", function () {
+    likeButton.classList.toggle("places__like_active");
+  });
+});
+
+// likeButton.addEventListener("click", function () {
+//   likeButton.classList.toggle("places__like_active");
+// });

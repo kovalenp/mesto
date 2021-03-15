@@ -1,3 +1,9 @@
 .places__text-container {
   color: var(--color_black);
+  display: flex;
+  margin: 0 auto;
+  margin-top: 25px;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 2 * 20px);
 }

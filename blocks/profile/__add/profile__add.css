@@ -2,8 +2,12 @@
   width: 150px;
   height: 50px;
   border: 2px solid #fff;
-  background-color: transparent;
-  overflow: hidden;
-  outline: none;
-  margin-left: auto;  
+  margin-left: auto;
+}
+
+@media screen and (max-width: 670px) {
+  .profile__add {
+    margin-left: 0;
+    width: 282px;
+  }
 }

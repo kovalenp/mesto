@@ -4,5 +4,14 @@
   justify-content: flex-start;
   align-items: center;
   margin-top: 40px;
-    margin-bottom: 49px;
+  margin-bottom: 49px;
+}
+
+@media screen and (max-width: 670px) {
+  .profile {
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 42px;
+    margin-bottom: 36px;
+  }
 }
