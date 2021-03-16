@@ -4,6 +4,8 @@ const likeButtons = document.querySelectorAll(".places__like");
 
 const formElement = document.querySelector(".popup__form");
 
+const popup = document.querySelector(".popup");
+
 const profileName = document.querySelector(".profile__name");
 const profileRole = document.querySelector(".profile__role");
 
@@ -15,13 +17,13 @@ editButton.addEventListener("click", openPopup);
 closeButton.addEventListener("click", closePopup);
 
 function openPopup() {
-  document.querySelector(".popup").classList.add("popup_opened");
-  usernameInput.value = profileName.innerText || "";
-  roleInput.value = profileRole.innerText || "";
+  popup.classList.add("popup_opened");
+  usernameInput.value = profileName.textContent;
+  roleInput.value = profileRole.textContent;
 }
 
 function closePopup() {
-  document.querySelector(".popup").classList.remove("popup_opened");
+  popup.classList.remove("popup_opened");
 }
 
 function formSubmitHandler(e) {

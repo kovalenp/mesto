@@ -4,23 +4,12 @@
   background-size: cover;
   width: 24px;
   height: 24px;
-  position: absolute;
-  top: 12px;
-  right: -43px;
+  align-self: center;
   border: none;
-}
-
-@media screen and (max-width: 896px) {
-  .profile__edit {
-    right: -38px;
-    top: 7px;
-  }
 }
 
 @media screen and (max-width: 670px) {
   .profile__edit {
-    right: -28px;
-    top: 6px;
     width: 18px;
     height: 18px;
   }
