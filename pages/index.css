@@ -21,7 +21,7 @@
 @import "../blocks/places/__like/_active/places__like_active.css";
 @import "../blocks/places/__name/places__name.css";
 @import "../blocks/popup/popup.css";
-@import "../blocks/popup/__opened/popup_opened.css";
+@import "../blocks/popup/_opened/popup_opened.css";
 @import "../blocks/popup/__title/popup__title.css";
 @import "../blocks/popup/__container/popup__container.css";
 @import "../blocks/popup/__close/popup__close.css";
