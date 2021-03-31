@@ -1,101 +1,76 @@
-const initData = [
-  {
-    name: "Архыз",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
-const editButton = document.querySelector(".profile__edit");
-const closeButton = document.querySelector(".popup__close");
-
-const likeButtons = document.querySelectorAll(".places__like");
-
-const formElement = document.querySelector(".popup__form");
-
-const popup = document.querySelector(".popup");
-
-const profileName = document.querySelector(".profile__name");
-const profileRole = document.querySelector(".profile__role");
-
-const usernameInput = document.querySelector("#username");
-const roleInput = document.querySelector("#role");
-
-const cardTemplate = document
+const cardElementTemplate = document
   .querySelector(".places__item-template")
   .content.querySelector(".places__item");
 
+const modalPhoto = document.querySelector(".modal_photo");
 const placesList = document.querySelector(".places__list");
 
-editButton.addEventListener("click", openPopup);
+const modalPhotoImg = modalPhoto.querySelector(".photo__img");
+const modalPhotoCaption = modalPhoto.querySelector(".photo__caption");
+const modalPhotoCloseButton = modalPhoto.querySelector(".modal__close_photo");
 
-closeButton.addEventListener("click", closePopup);
+const addCardButton = document.querySelector(".profile__add");
+const modalAdd = document.querySelector(".modal_add-photo");
+const modalAddCloseButton = document.querySelector(".modal__close_add");
+const addForm = document.querySelector(".modal__form_add");
+const nameInput = document.querySelector("#name");
+const linkInput = document.querySelector("#link");
 
-function openPopup() {
-  popup.classList.add("popup_opened");
-  usernameInput.value = profileName.textContent;
-  roleInput.value = profileRole.textContent;
-}
+addCardButton.addEventListener("click", openAddModal);
 
-function closePopup() {
-  popup.classList.remove("popup_opened");
-}
+addForm.addEventListener("submit", addFormSubmitHandler);
 
-function formSubmitHandler(e) {
+function addFormSubmitHandler(e) {
   e.preventDefault();
-  profileName.textContent = usernameInput.value;
-  profileRole.textContent = roleInput.value;
-  closePopup();
+  const card = { name: nameInput.value, link: linkInput.value };
+  addPlaces(card, true);
+  closeModal(modalAdd);
+  nameInput.value = "";
+  linkInput.value = "";
+}
+
+function openAddModal() {
+  modalAdd.classList.add("modal_opened");
+  modalAddCloseButton.addEventListener("click", () => closeModal(modalAdd));
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
 }
 
 function onClickLikeButtonHandler(e) {
   e.target.classList.toggle("places__like_active");
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+function openPhotoModal(card) {
+  modalPhotoCloseButton.addEventListener("click", () => closeModal(modalPhoto));
+  modalPhotoImg.src = card.link;
+  modalPhotoCaption.textContent = card.name;
+  modalPhoto.classList.add("modal_opened");
+}
 
-function addCard(card) {
-  const cardItem = cardTemplate.cloneNode(true);
+function createCardHtmlElement(cardData) {
+  const { name, link } = cardData;
+  const cardItem = cardElementTemplate.cloneNode(true);
   const cardImg = cardItem.querySelector(".places__img");
   const cardName = cardItem.querySelector(".places__name");
   const cardDelete = cardItem.querySelector(".places__delete");
   const cardLike = cardItem.querySelector(".places__like");
 
-  cardImg.src = card.link;
-  cardName.textContent = card.name;
+  cardImg.src = link;
+  cardImg.alt = `Фотография ${name}`;
+  cardName.textContent = name;
 
-  cardDelete.addEventListener("click", () => {
-    cardItem.remove();
-  });
-
+  cardDelete.addEventListener("click", () => cardItem.remove());
   cardLike.addEventListener("click", onClickLikeButtonHandler);
+  cardImg.addEventListener("click", () => openPhotoModal(cardData));
 
-  placesList.append(cardItem);
+  return cardItem;
 }
 
-initData.forEach(addCard);
+function addPlaces(card, isFirstElemenet = false) {
+  const cardItem = createCardHtmlElement(card);
+  isFirstElemenet ? placesList.prepend(cardItem) : placesList.append(cardItem);
+}
+
+initData.forEach(addPlaces);

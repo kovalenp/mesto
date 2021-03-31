@@ -1,0 +1,11 @@
+.modal__container_form {
+  background-color: var(--color_white);
+  color: var(--color_black);
+  width: 430px;
+}
+
+@media screen and (max-width: 670px) {
+  .modal__container_form {
+    width: 282px;
+  }
+}

@@ -1,4 +1,4 @@
-.popup__close {
+.modal__close {
   background-image: url("../../../images/button__close.svg");
   background-position: center;
   background-size: cover;
@@ -11,7 +11,7 @@
 }
 
 @media screen and (max-width: 670px) {
-  .popup__close {
+  .modal__close {
     width: 26px;
     height: 26px;
     top: -40px;

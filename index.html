@@ -36,38 +36,90 @@
       <footer class="footer">
         <p class="footer__copyright">@ 2021 Mesto Russia</p>
       </footer>
-      <div class="popup">
-        <div class="popup__container">
-          <h3 class="popup__title">Редактировать профиль</h3>
-          <form class="popup__form" name="profile" autocomplete="off">
+
+      <div class="modal modal_profile">
+        <div class="modal__container modal__container_form">
+          <h3 class="modal__title">Редактировать профиль</h3>
+          <form
+            class="modal__form modal__form_profile"
+            name="profile"
+            autocomplete="off"
+          >
             <input
               type="text"
               id="username"
               name="username"
-              class="popup__text-input"
+              class="modal__text-input"
               placeholder="Имя"
             />
             <input
               type="text"
               id="role"
               name="role"
-              class="popup__text-input"
+              class="modal__text-input"
               placeholder="О себе"
             />
             <input
               type="submit"
               value="Сохранить"
-              class="popup__submit-input"
+              class="modal__submit-input"
             />
           </form>
           <button
-            class="button popup__close"
+            class="button modal__close modal__close_profile"
+            type="button"
+            aria-label="Закрыть"
+          ></button>
+        </div>
+      </div>
+
+      <div class="modal modal_add-photo">
+        <div class="modal__container modal__container_form">
+          <h3 class="modal__title">Новое место</h3>
+          <form
+            class="modal__form modal__form_add"
+            name="add-photo"
+            autocomplete="off"
+          >
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="modal__text-input"
+              placeholder="Название"
+            />
+            <input
+              type="text"
+              id="link"
+              name="link"
+              class="modal__text-input"
+              placeholder="Ссылка на картинку"
+            />
+            <input type="submit" value="Создать" class="modal__submit-input" />
+          </form>
+          <button
+            class="button modal__close modal__close_add"
+            type="button"
+            aria-label="Закрыть"
+          ></button>
+        </div>
+      </div>
+
+      <div class="modal modal_photo">
+        <div class="modal__container">
+          <figure class="photo">
+            <img src="" alt="" class="photo__img" />
+            <figcaption class="photo__caption"></figcaption>
+          </figure>
+          <button
+            class="button modal__close modal__close_photo"
             type="button"
             aria-label="Закрыть"
           ></button>
         </div>
       </div>
     </div>
+
     <template class="places__item-template">
       <li class="places__item">
         <div class="places__img-container">
@@ -88,6 +140,9 @@
         </div>
       </li>
     </template>
+
+    <script src="./scripts/data.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/profile.js"></script>
   </body>
 </html>
