@@ -1,4 +1,4 @@
-.popup__submit-input {
+.modal__submit-input {
   border: none;
   background-color: var(--color_black);
   color: var(--color_white);
@@ -11,13 +11,13 @@
   font-size: 18px;
 }
 
-.popup__submit-input:hover {
+.modal__submit-input:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
 @media screen and (max-width: 670px) {
-  .popup__submit-input {
+  .modal__submit-input {
     font-size: 14px;
     width: 238px;
     height: 46px;

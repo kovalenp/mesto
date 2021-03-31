@@ -1,42 +1,37 @@
-const editButton = document.querySelector(".profile__edit");
-const closeButton = document.querySelector(".popup__close");
-const likeButtons = document.querySelectorAll(".places__like");
+const cardElementTemplate = document
+  .querySelector(".places__item-template")
+  .content.querySelector(".places__item");
 
-const formElement = document.querySelector(".popup__form");
+const placesList = document.querySelector(".places__list");
 
-const popup = document.querySelector(".popup");
-
-const profileName = document.querySelector(".profile__name");
-const profileRole = document.querySelector(".profile__role");
-
-const usernameInput = document.querySelector("#username");
-const roleInput = document.querySelector("#role");
-
-editButton.addEventListener("click", openPopup);
-
-closeButton.addEventListener("click", closePopup);
-
-function openPopup() {
-  popup.classList.add("popup_opened");
-  usernameInput.value = profileName.textContent;
-  roleInput.value = profileRole.textContent;
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
 }
 
-function closePopup() {
-  popup.classList.remove("popup_opened");
+function onClickLikeButtonHandler(e) {
+  e.target.classList.toggle("places__like_active");
 }
 
-function formSubmitHandler(e) {
-  e.preventDefault();
-  profileName.textContent = usernameInput.value;
-  profileRole.textContent = roleInput.value;
-  closePopup();
+function createCardHtmlElement(cardData) {
+  const { name, link } = cardData;
+  const cardItem = cardElementTemplate.cloneNode(true);
+  const cardImg = cardItem.querySelector(".places__img");
+  const cardName = cardItem.querySelector(".places__name");
+  const cardDelete = cardItem.querySelector(".places__delete");
+  const cardLike = cardItem.querySelector(".places__like");
+
+  cardImg.src = link;
+  cardImg.alt = `Фотография ${name}`;
+  cardName.textContent = name;
+
+  cardDelete.addEventListener("click", () => cardItem.remove());
+  cardLike.addEventListener("click", onClickLikeButtonHandler);
+  cardImg.addEventListener("click", () => openPhotoModal(cardData));
+
+  return cardItem;
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
-
-likeButtons.forEach((likeButton) => {
-  likeButton.addEventListener("click", function () {
-    likeButton.classList.toggle("places__like_active");
-  });
-});
+function addPlaces(card, isFirstElement = false) {
+  const cardItem = createCardHtmlElement(card);
+  isFirstElement ? placesList.prepend(cardItem) : placesList.append(cardItem);
+}
