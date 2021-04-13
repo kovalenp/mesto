@@ -44,21 +44,34 @@
             class="modal__form modal__form_profile"
             name="profile"
             autocomplete="off"
+            novalidate
           >
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="modal__text-input"
-              placeholder="Имя"
-            />
-            <input
-              type="text"
-              id="role"
-              name="role"
-              class="modal__text-input"
-              placeholder="О себе"
-            />
+            <label class="modal__label">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="modal__text-input"
+                placeholder="Имя"
+                minlength="2"
+                maxlength="40"
+                required
+              />
+              <span class="modal__text-input-error username-error"></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="text"
+                id="role"
+                name="role"
+                class="modal__text-input"
+                placeholder="О себе"
+                minlength="2"
+                maxlength="200"
+                required
+              />
+              <span class="modal__text-input-error role-error"></span>
+            </label>
             <input
               type="submit"
               value="Сохранить"
@@ -80,22 +93,38 @@
             class="modal__form modal__form_add"
             name="add-photo"
             autocomplete="off"
+            novalidate
           >
+            <label class="modal__label">
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="modal__text-input"
+                placeholder="Название"
+                minlength="1"
+                maxlength="30"
+                required
+              />
+              <span class="modal__text-input-error name-error"></span>
+            </label>
+            <label class="modal__label">
+              <input
+                type="url"
+                pattern="https?://.*"
+                required
+                id="link"
+                name="link"
+                class="modal__text-input"
+                placeholder="Ссылка на картинку"
+              />
+              <span class="modal__text-input-error link-error"></span>
+            </label>
             <input
-              type="text"
-              id="name"
-              name="name"
-              class="modal__text-input"
-              placeholder="Название"
+              type="submit"
+              value="Создать"
+              class="modal__submit-input modal__button"
             />
-            <input
-              type="text"
-              id="link"
-              name="link"
-              class="modal__text-input"
-              placeholder="Ссылка на картинку"
-            />
-            <input type="submit" value="Создать" class="modal__submit-input" />
           </form>
           <button
             class="button modal__close modal__close_add"
@@ -149,5 +178,6 @@
       </li>
     </template>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>

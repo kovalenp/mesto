@@ -60,19 +60,32 @@ const profileRole = document.querySelector(".profile__role");
 const usernameInput = document.querySelector("#username");
 const roleInput = document.querySelector("#role");
 
+const modalsList = Array.from(document.querySelectorAll(".modal"));
+
 addCardButton.addEventListener("click", openAddModal);
 addForm.addEventListener("submit", addFormSubmitHandler);
 modalPhotoCloseButton.addEventListener("click", () => closeModal(modalPhoto));
 profileEditButton.addEventListener("click", openProfileModal);
 profileCloseButton.addEventListener("click", () => closeModal(profileModal));
+modalAddCloseButton.addEventListener("click", () => closeModal(modalAdd));
 profileForm.addEventListener("submit", profileSubmitHandler);
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keyup", (evt) => closeOnEscape(evt, modal));
+  clearAddFormInputs();
+  clearPhotoModal();
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keyup", (evt) => closeOnEscape(evt, modal));
+}
+
+function closeOnEscape(evt, modal) {
+  if (evt.key === "Escape") {
+    closeModal(modal);
+  }
 }
 
 function openPhotoModal(card) {
@@ -83,8 +96,13 @@ function openPhotoModal(card) {
 }
 
 function clearAddFormInputs() {
-  nameInput.value = "";
-  linkInput.value = "";
+  addForm.reset();
+}
+
+function clearPhotoModal() {
+  modalPhotoImg.src = "";
+  modalPhotoImg.alt = ``;
+  modalPhotoCaption.textContent = "";
 }
 
 function addFormSubmitHandler(e) {
@@ -92,15 +110,10 @@ function addFormSubmitHandler(e) {
   const card = { name: nameInput.value, link: linkInput.value };
   addPlaces(card, true);
   closeModal(modalAdd);
-  clearAddFormInputs();
 }
 
 function openAddModal() {
   openModal(modalAdd);
-  modalAddCloseButton.addEventListener("click", () => {
-    closeModal(modalAdd);
-    clearAddFormInputs();
-  });
 }
 
 function openProfileModal() {
@@ -143,5 +156,18 @@ function addPlaces(card, isFirstElement = false) {
   const cardItem = createCardHtmlElement(card);
   isFirstElement ? placesList.prepend(cardItem) : placesList.append(cardItem);
 }
+
+modalsList.forEach((modal) => {
+  // Don't propagate click from modal window itself
+  const modalContainer = modal.querySelector(".modal__container");
+  modalContainer.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+  // Close modal if clicked outside
+  modal.addEventListener("click", () => {
+    closeModal(modal);
+  });
+});
 
 initData.forEach(addPlaces);

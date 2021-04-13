@@ -33,7 +33,11 @@
 @import "../blocks/modal/__container/_form/modal__container_form.css";
 @import "../blocks/modal/__close/modal__close.css";
 @import "../blocks/modal/__form/modal__form.css";
+@import "../blocks/modal/__label/modal__label.css";
 @import "../blocks/modal/__submit-input/modal__submit-input.css";
 @import "../blocks/modal/__text-input/modal__text-input.css";
+@import "../blocks/modal/__text-input/_error/modal__text-input_error.css";
+@import "../blocks/modal/__text-input-error/modal__text-input-error.css";
+@import "../blocks/modal/__text-input-error/_active/modal__text-input-error_active.css";
 @import "../blocks/footer/footer.css";
 @import "../blocks/footer/__copyright/footer__copyright.css";

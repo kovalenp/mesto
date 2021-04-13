@@ -16,6 +16,14 @@
   cursor: pointer;
 }
 
+.modal__submit-input:disabled {
+  opacity: 1;
+  cursor: auto;
+  background-color: var(--color_white);
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
 @media screen and (max-width: 670px) {
   .modal__submit-input {
     font-size: 14px;
