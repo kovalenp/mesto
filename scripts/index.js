@@ -1,36 +1,3 @@
-const initData = [
-  {
-    name: "Архыз",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link:
-      "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
-
 const cardElementTemplate = document
   .querySelector("#place-template")
   .content.querySelector(".places__item");
@@ -43,6 +10,7 @@ const modalAddCloseButton = document.querySelector(".modal__close_add");
 const addForm = document.querySelector(".modal__form_add");
 const nameInput = document.querySelector("#name");
 const linkInput = document.querySelector("#link");
+const addSubmitButton = addForm.querySelector(".modal__submit-input");
 
 const modalPhoto = document.querySelector(".modal_photo");
 
@@ -59,6 +27,7 @@ const profileName = document.querySelector(".profile__name");
 const profileRole = document.querySelector(".profile__role");
 const usernameInput = document.querySelector("#username");
 const roleInput = document.querySelector("#role");
+const profileSubmitButton = profileForm.querySelector(".modal__submit-input");
 
 const modalsList = Array.from(document.querySelectorAll(".modal"));
 
@@ -72,19 +41,18 @@ profileForm.addEventListener("submit", profileSubmitHandler);
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keyup", (evt) => closeOnEscape(evt, modal));
-  clearAddFormInputs();
-  clearPhotoModal();
+  document.removeEventListener("keyup", closeOnEscape);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keyup", (evt) => closeOnEscape(evt, modal));
+  document.addEventListener("keyup", closeOnEscape);
 }
 
-function closeOnEscape(evt, modal) {
+function closeOnEscape(evt) {
   if (evt.key === "Escape") {
-    closeModal(modal);
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
 }
 
@@ -99,27 +67,35 @@ function clearAddFormInputs() {
   addForm.reset();
 }
 
-function clearPhotoModal() {
-  modalPhotoImg.src = "";
-  modalPhotoImg.alt = ``;
-  modalPhotoCaption.textContent = "";
-}
-
-function addFormSubmitHandler(e) {
-  e.preventDefault();
+function addFormSubmitHandler(evt) {
+  evt.preventDefault();
   const card = { name: nameInput.value, link: linkInput.value };
   addPlaces(card, true);
   closeModal(modalAdd);
+  addForm.reset();
 }
 
 function openAddModal() {
+  // fix: remove errors from previous modal opening
+  hideInputError(addForm, nameInput);
+  hideInputError(addForm, linkInput);
+
+  addForm.reset();
+
   openModal(modalAdd);
+  /*fix for reviewer comment:
+
+  При создании карточки и открытии попапа снова,
+  кнопка сабмита не заблокирована, хотя поля пустые,
+  и можно создать пустую карточку*/
+  toggleButtonState([nameInput, linkInput], addSubmitButton);
 }
 
 function openProfileModal() {
   openModal(profileModal);
   usernameInput.value = profileName.textContent;
   roleInput.value = profileRole.textContent;
+  toggleButtonState([usernameInput, roleInput], profileSubmitButton); // fix to enable button when modal opened with default data
 }
 
 function profileSubmitHandler(e) {
@@ -160,8 +136,8 @@ function addPlaces(card, isFirstElement = false) {
 modalsList.forEach((modal) => {
   // Don't propagate click from modal window itself
   const modalContainer = modal.querySelector(".modal__container");
-  modalContainer.addEventListener("click", (event) => {
-    event.stopPropagation();
+  modalContainer.addEventListener("click", (evt) => {
+    evt.stopPropagation();
   });
 
   // Close modal if clicked outside
