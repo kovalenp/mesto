@@ -1,4 +1,4 @@
-const initData = [
+export const initData = [
   {
     name: "Архыз",
     link:

@@ -1,5 +1,5 @@
-const INPUT_ERROR_CLASS = "modal__text-input_error";
-const ERROR_CLASS = "modal__text-input-error_active";
+export const INPUT_ERROR_CLASS = "modal__text-input_error";
+export const ERROR_CLASS = "modal__text-input-error_active";
 
 // validation
 
@@ -16,7 +16,7 @@ function showInputError(
   errorElement.classList.add(`${errorClass}`);
 }
 
-function hideInputError(
+export function hideInputError(
   formElement,
   inputElement,
   inputErrorClass = INPUT_ERROR_CLASS,
@@ -53,7 +53,7 @@ function hasInvalidInput(inputList) {
   });
 }
 
-function toggleButtonState(inputList, buttonElement) {
+export function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.disabled = true;
   } else {
@@ -87,7 +87,7 @@ const setEventListeners = (
   });
 };
 
-function enableValidation(settings) {
+export function enableValidation(settings) {
   const {
     formSelector,
     inputSelector,
@@ -110,11 +110,3 @@ function enableValidation(settings) {
     );
   });
 }
-
-enableValidation({
-  formSelector: ".modal__form",
-  inputSelector: ".modal__text-input",
-  submitSelector: ".modal__submit-input",
-  inputErrorClass: INPUT_ERROR_CLASS,
-  errorClass: ERROR_CLASS,
-});
