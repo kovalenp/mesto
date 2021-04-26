@@ -1,9 +1,30 @@
-const modalPhoto = document.querySelector(".modal_photo");
-const modalPhotoImg = modalPhoto.querySelector(".photo__img");
-const modalPhotoCaption = modalPhoto.querySelector(".photo__caption");
-const modalPhotoCloseButton = modalPhoto.querySelector(".modal__close_photo");
+import { hideInputError, toggleButtonState } from "./validationUtils.js";
+import * as mesto from "./pageHtmlElements.js";
+
+const {
+  modalPhoto,
+  modalPhotoImg,
+  modalPhotoCaption,
+  modalPhotoCloseButton,
+  addForm,
+  modalAdd,
+  modalAddCloseButton,
+  profileModal,
+  profileCloseButton,
+  profileName,
+  profileRole,
+  nameInput,
+  linkInput,
+  profileForm,
+  usernameInput,
+  roleInput,
+  addSubmitButton,
+  profileSubmitButton,
+} = mesto;
 
 modalPhotoCloseButton.addEventListener("click", () => closeModal(modalPhoto));
+modalAddCloseButton.addEventListener("click", () => closeModal(modalAdd));
+profileCloseButton.addEventListener("click", () => closeModal(profileModal));
 
 const modalsList = Array.from(document.querySelectorAll(".modal"));
 
@@ -20,7 +41,7 @@ modalsList.forEach((modal) => {
   });
 });
 
-function closeModal(modal) {
+export function closeModal(modal) {
   if (modal.classList.contains("modal_photo")) {
     modalPhotoImg.src = "";
     modalPhotoImg.alt = "";
@@ -30,7 +51,7 @@ function closeModal(modal) {
   document.removeEventListener("keyup", closeOnEscape);
 }
 
-function _openModal(modal) {
+export function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keyup", closeOnEscape);
 }
@@ -46,5 +67,27 @@ export function openPhotoModal(name, link) {
   modalPhotoImg.src = link;
   modalPhotoImg.alt = `Большая и очень красивая фотография ${name}`;
   modalPhotoCaption.textContent = name;
-  _openModal(modalPhoto);
+  openModal(modalPhoto);
+}
+
+export function openAddModal() {
+  // fix: remove errors from previous modal opening
+  hideInputError(addForm, nameInput);
+  hideInputError(addForm, linkInput);
+
+  addForm.reset();
+
+  openModal(modalAdd);
+  toggleButtonState([nameInput, linkInput], addSubmitButton);
+}
+
+export function openProfileModal() {
+  // fix: remove errors from previous modal opening
+  hideInputError(profileForm, usernameInput);
+  hideInputError(profileForm, roleInput);
+
+  openModal(profileModal);
+  usernameInput.value = profileName.textContent;
+  roleInput.value = profileRole.textContent;
+  toggleButtonState([usernameInput, roleInput], profileSubmitButton); // fix to enable button when modal opened with default data
 }
