@@ -13,6 +13,7 @@ export default class Card {
 
   _onDeleteHandler() {
     this._cardItem.remove();
+    this._cardItem = null;
   }
 
   _addEventListeners() {

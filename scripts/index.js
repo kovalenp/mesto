@@ -1,6 +1,5 @@
 import Card from "./Card.js";
 import { initData } from "./data.js";
-import { FormValidator } from "./FormValidator.js";
 import { openAddModal, openProfileModal, closeModal } from "./modalUtils.js";
 import * as mesto from "./pageHtmlElements.js";
 
@@ -49,9 +48,3 @@ function addPlaces(card, isFirstElement = false) {
 }
 
 initData.forEach(addPlaces);
-
-const addCardFormValidator = new FormValidator({}, addForm);
-addCardFormValidator.enableValidation();
-
-const editProfileFormValidator = new FormValidator({}, profileForm);
-editProfileFormValidator.enableValidation();

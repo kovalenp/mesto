@@ -5,11 +5,9 @@ import {
   DEFAULT_SUBMIT_SELECTOR,
 } from "./constants.js";
 
-import {
-  showInputError,
-  hideInputError,
-  toggleButtonState,
-} from "./validationUtils.js";
+
+// Уважаемый Антон, я сразу хотел так сделать, меня смутило в задании:
+// "имеет ОДИН публичный метод enableValidation, который включает валидацию формы" ( c )
 
 export class FormValidator {
   constructor(selectors, formElement) {
@@ -18,33 +16,61 @@ export class FormValidator {
     this._submitSelector = selectors.submitSelector || DEFAULT_SUBMIT_SELECTOR;
     this._inputErrorClass = selectors.inputErrorClass || INPUT_ERROR_CLASS;
     this._errorClass = selectors.errorElement || ERROR_CLASS;
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(`${this._inputSelector}`)
+    );
+    this._submitElement = this._formElement.querySelector(
+      `${this._submitSelector}`
+    );
+  }
+
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    });
+  }
+
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
+    );
+    inputElement.classList.add(`${this._inputErrorClass}`);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(`${this._errorClass}`);
   }
 
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
-      showInputError(
-        this._formElement,
-        inputElement,
-        inputElement.validationMessage
-      );
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      hideInputError(this._formElement, inputElement);
+      this.hideInputError(inputElement);
     }
   };
 
-  _setEventListeners = () => {
-    const inputList = Array.from(
-      this._formElement.querySelectorAll(`${this._inputSelector}`)
+  hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(
+      `.${inputElement.id}-error`
     );
-    const submitElement = this._formElement.querySelector(
-      `${this._submitSelector}`
-    );
-    toggleButtonState(inputList, submitElement);
+    inputElement.classList.remove(`${this._inputErrorClass}`);
+    errorElement.classList.remove(`${this._errorClass}`);
+    errorElement.textContent = "";
+  }
 
-    inputList.forEach((inputElement) => {
+  toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._submitElement.disabled = true;
+    } else {
+      this._submitElement.disabled = false;
+    }
+  }
+
+  _setEventListeners = () => {
+    this.toggleButtonState(this._inputList, this._submitElement);
+
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
-        toggleButtonState(inputList, submitElement);
+        this.toggleButtonState();
       });
     });
   };
