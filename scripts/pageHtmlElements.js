@@ -25,3 +25,5 @@ export const profileSubmitButton = profileForm.querySelector(
   ".modal__submit-input"
 );
 export const placesList = document.querySelector(".places__list");
+
+export const PLACES_LIST = ".places__list";
