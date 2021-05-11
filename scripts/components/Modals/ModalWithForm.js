@@ -1,4 +1,4 @@
-import Modal from "./Modal.js ";
+import Modal from "./Modal.js";
 import FormValidator from "../../validation/FormValidator.js";
 
 export default class ModalWithForm extends Modal {

@@ -1,3 +1,5 @@
+import "../pages/index.css";
+
 import { initData } from "./data.js";
 
 import Card from "./components/Card.js";
@@ -99,5 +101,6 @@ modalsList.forEach((modal) => {
   // Close modal if clicked outside
   modal.addEventListener("mousedown", () => {
     modal.classList.remove("modal_opened");
+    modal.querySelector(".modal__form").reset();
   });
 });
