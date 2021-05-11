@@ -19,7 +19,6 @@ export default class ModalWithImage extends Modal {
     this._modalPhotoImg.src = url;
     this._modalPhotoImg.alt = `Большая и очень красивая фотография ${name}`;
     this._modalPhotoCaption.textContent = name;
-    this._modal.classList.add("modal_opened");
-    document.addEventListener("keyup", this._handleEscClose.bind(this));
+    super.open();
   }
 }

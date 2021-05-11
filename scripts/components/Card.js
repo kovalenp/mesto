@@ -1,5 +1,3 @@
-// import { openPhotoModal } from "./modalUtils.js";
-
 export default class Card {
   constructor(
     data,

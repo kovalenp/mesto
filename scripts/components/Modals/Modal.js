@@ -5,20 +5,20 @@ export default class Modal {
     this._modal = document.querySelector(modalSelector);
   }
 
-  _handleEscClose(evt) {
+  _handleEscClose = (evt) => {
     if (evt.key === ESC_KEY) {
       this.close();
     }
-  }
+  };
 
   close() {
     this._modal.classList.remove("modal_opened");
-    document.removeEventListener("keyup", this._handleEscClose.bind(this));
+    document.removeEventListener("keyup", this._handleEscClose);
   }
 
   open() {
     this._modal.classList.add("modal_opened");
-    document.addEventListener("keyup", this._handleEscClose.bind(this));
+    document.addEventListener("keyup", this._handleEscClose);
   }
 
   setEventListeners() {
