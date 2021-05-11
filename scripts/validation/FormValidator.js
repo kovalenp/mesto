@@ -3,13 +3,9 @@ import {
   ERROR_CLASS,
   DEFAULT_INPUT_SELECTOR,
   DEFAULT_SUBMIT_SELECTOR,
-} from "./constants.js";
+} from "../constants.js";
 
-
-// Уважаемый Антон, я сразу хотел так сделать, меня смутило в задании:
-// "имеет ОДИН публичный метод enableValidation, который включает валидацию формы" ( c )
-
-export class FormValidator {
+export default class FormValidator {
   constructor(selectors, formElement) {
     this._formElement = formElement;
     this._inputSelector = selectors.inputSelector || DEFAULT_INPUT_SELECTOR;

@@ -1,10 +1,13 @@
-import { openPhotoModal } from "./modalUtils.js";
-
 export default class Card {
-  constructor(data, templateSelector = "#place-template") {
+  constructor(
+    data,
+    handleCardClick = () => {},
+    templateSelector = "#place-template"
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _onLikeHandler(e) {
@@ -23,7 +26,7 @@ export default class Card {
     );
     this._cardLike.addEventListener("click", this._onLikeHandler);
     this._cardImg.addEventListener("click", () =>
-      openPhotoModal(this._name, this._link)
+      this._handleCardClick(this._name, this._link)
     );
   }
 
