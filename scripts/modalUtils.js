@@ -21,7 +21,7 @@ const {
   roleInput,
 } = mesto;
 
-modalPhotoCloseButton.addEventListener("click", () => closeModal(modalPhoto));
+// modalPhotoCloseButton.addEventListener("click", () => closeModal(modalPhoto));
 modalAddCloseButton.addEventListener("click", () => closeModal(modalAdd));
 profileCloseButton.addEventListener("click", () => closeModal(profileModal));
 
@@ -51,11 +51,11 @@ export function closeModal(modal) {
   document.removeEventListener("keyup", closeOnEscape);
 }
 
-function _cleanUpPhotoContainer() {
-  modalPhotoImg.src = "";
-  modalPhotoImg.alt = "";
-  modalPhotoCaption.textContent = "";
-}
+// function _cleanUpPhotoContainer() {
+//   modalPhotoImg.src = "";
+//   modalPhotoImg.alt = "";
+//   modalPhotoCaption.textContent = "";
+// }
 
 export function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -69,13 +69,13 @@ function closeOnEscape(evt) {
   }
 }
 
-export function openPhotoModal(name, link) {
-  _cleanUpPhotoContainer(); // There is a bug without this cleanup. Rewrite causes "blink" effect with "old" image.
-  modalPhotoImg.src = link;
-  modalPhotoImg.alt = `Большая и очень красивая фотография ${name}`;
-  modalPhotoCaption.textContent = name;
-  openModal(modalPhoto);
-}
+// export function openPhotoModal(name, link) {
+//   _cleanUpPhotoContainer(); // There is a bug without this cleanup. Rewrite causes "blink" effect with "old" image.
+//   modalPhotoImg.src = link;
+//   modalPhotoImg.alt = `Большая и очень красивая фотография ${name}`;
+//   modalPhotoCaption.textContent = name;
+//   openModal(modalPhoto);
+// }
 
 export function openAddModal() {
   // fix: remove errors from previous modal opening

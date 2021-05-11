@@ -1,5 +1,8 @@
 import Card from "./Card.js";
+
 import Section from "./components/Section.js";
+import ModalWithImage from "./components/Modals/ModalWithImage.js";
+
 import { initData } from "./data.js";
 import { openAddModal, openProfileModal, closeModal } from "./modalUtils.js";
 import * as mesto from "./pageHtmlElements.js";
@@ -7,6 +10,7 @@ import * as mesto from "./pageHtmlElements.js";
 const {
   placesList,
   PLACES_LIST,
+  MODAL_PHOTO,
   modalAdd,
   profileModal,
   addCardButton,
@@ -52,11 +56,18 @@ function addPlaces(card, isFirstElement = false) {
 
 // initData.forEach(addPlaces);
 
+const imgModal = new ModalWithImage(MODAL_PHOTO);
+imgModal.setEventListeners();
+
+const openCardModal = (name, url) => {
+  imgModal.open(name, url);
+};
+
 const cardList = new Section(
   {
     items: initData,
     renderer: (item) => {
-      const card = new Card(item);
+      const card = new Card(item, openCardModal);
       cardList.addItem(card.getCard());
     },
   },
