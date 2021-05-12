@@ -27,7 +27,7 @@ import {
 
 // photo modal
 const imgModal = new ModalWithImage(MODAL_PHOTO);
-// imgModal.setEventListeners();
+imgModal.setEventListeners();
 
 const onCardClick = (name, url) => {
   imgModal.open(name, url);
