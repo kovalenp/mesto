@@ -35,6 +35,7 @@ export default class ModalWithForm extends Modal {
   }
 
   open = () => {
+    this.setEventListeners();
     this._inputList.forEach((input) =>
       this._formValidator.hideInputError(input)
     );

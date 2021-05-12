@@ -58,7 +58,7 @@ const addPlaceModal = new ModalWithForm({
   formValidator: new FormValidator({}, addCardForm),
 });
 
-addPlaceModal.setEventListeners();
+// addPlaceModal.setEventListeners();
 addPlaceModal.enableFormValidation();
 
 // addCard button listener
@@ -80,7 +80,7 @@ const profileModal = new ModalWithForm({
   formValidator: new FormValidator({}, editProfileForm),
 });
 
-profileModal.setEventListeners();
+// profileModal.setEventListeners();
 profileModal.enableFormValidation();
 
 // profile button listener
