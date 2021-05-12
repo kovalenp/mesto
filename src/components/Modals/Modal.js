@@ -11,9 +11,9 @@ export default class Modal {
     this._modal.classList.remove("modal_opened");
     this._removeEventListeners();
 
-    // cleanup form onClose if modal has one
-    const modalForm = this._modal.querySelector(".modal__form");
-    if (modalForm) modalForm.reset();
+    // // cleanup form onClose if modal has one
+    // const modalForm = this._modal.querySelector(".modal__form");
+    // if (modalForm) modalForm.reset();
   };
 
   _handleEscClose = (evt) => {
