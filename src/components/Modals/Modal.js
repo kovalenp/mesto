@@ -28,11 +28,10 @@ export default class Modal {
 
   open() {
     this._modal.classList.add("modal_opened");
-    this._setEventListeners();
+    document.addEventListener("keyup", this._handleEscClose);
   }
 
   setEventListeners = () => {
-    document.addEventListener("keyup", this._handleEscClose);
     this._closeButton.addEventListener("click", this.close);
     this._modalContainer.addEventListener("mousedown", this._onContainerClick);
     document.addEventListener("mousedown", this._onOverlayClick);
