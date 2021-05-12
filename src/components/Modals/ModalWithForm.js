@@ -14,7 +14,6 @@ export default class ModalWithForm extends Modal {
     this._inputList.forEach(
       (input) => (this._formValues[input.name] = input.value)
     );
-
     return this._formValues;
   }
 
@@ -27,10 +26,9 @@ export default class ModalWithForm extends Modal {
   }
 
   setEventListeners() {
-    this._modal.addEventListener("submit", (evt) => {
+    this._modalForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._onSubmit(this._getInputValues());
-      this._modalForm.reset();
       this.close();
     });
     super.setEventListeners();
@@ -45,6 +43,7 @@ export default class ModalWithForm extends Modal {
   };
 
   close() {
+    this._modalForm.reset();
     super.close();
   }
 }

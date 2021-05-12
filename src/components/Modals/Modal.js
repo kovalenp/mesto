@@ -7,7 +7,7 @@ export default class Modal {
     this._modalContainer = this._modal.querySelector(".modal__container");
   }
 
-  close = () => {
+  close() {
     this._modal.classList.remove("modal_opened");
     document.removeEventListener("keyup", this._handleEscClose);
   };
@@ -31,8 +31,8 @@ export default class Modal {
     document.addEventListener("keyup", this._handleEscClose);
   }
 
-  setEventListeners = () => {
-    this._closeButton.addEventListener("click", this.close);
+  setEventListeners() {
+    this._closeButton.addEventListener("click", this.close.bind(this));
     this._modalContainer.addEventListener("mousedown", this._onContainerClick);
     document.addEventListener("mousedown", this._onOverlayClick);
   };
