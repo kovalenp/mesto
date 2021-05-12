@@ -33,6 +33,7 @@ export default class ModalWithForm extends Modal {
       this._modalForm.reset();
       this.close();
     });
+    super.setEventListeners();
   }
 
   open = () => {
