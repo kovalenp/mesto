@@ -3,9 +3,8 @@ import Modal from "./Modal.js";
 export default class ModalWithImage extends Modal {
   constructor(modalSelector) {
     super(modalSelector);
-    this._modalPhoto = document.querySelector(modalSelector);
-    this._modalPhotoImg = this._modalPhoto.querySelector(".photo__img");
-    this._modalPhotoCaption = this._modalPhoto.querySelector(".photo__caption");
+    this._modalPhotoImg = this._modal.querySelector(".photo__img");
+    this._modalPhotoCaption = this._modal.querySelector(".photo__caption");
   }
 
   _cleanUpPhotoContainer() {

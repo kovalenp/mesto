@@ -3,7 +3,7 @@ import {
   ERROR_CLASS,
   DEFAULT_INPUT_SELECTOR,
   DEFAULT_SUBMIT_SELECTOR,
-} from "../constants.js";
+} from "../utils/constants.js";
 
 export default class FormValidator {
   constructor(selectors, formElement) {

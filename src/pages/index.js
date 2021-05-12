@@ -1,17 +1,20 @@
-import "../pages/index.css";
+import "./index.css";
 
-import { initData } from "./data.js";
+import { initData } from "../data/data.js";
 
-import Card from "./components/Card.js";
-import UserInfo from "./components/UserInfo.js";
-import Section from "./components/Section.js";
-import ModalWithImage from "./components/Modals/ModalWithImage.js";
-import ModalWithForm from "./components/Modals/ModalWithForm.js";
+import Card from "../components/Card.js";
+import UserInfo from "../components/UserInfo.js";
+import Section from "../components/Section.js";
+import ModalWithImage from "../components/Modals/ModalWithImage.js";
+import ModalWithForm from "../components/Modals/ModalWithForm.js";
+import FormValidator from "../validation/FormValidator.js";
 
 const addCardButton = document.querySelector(".profile__add");
 const profileEditButton = document.querySelector(".profile__edit");
 const usernameInput = document.querySelector("#username");
 const roleInput = document.querySelector("#role");
+const editProfileForm = document.querySelector(".modal__form_profile");
+const addCardForm = document.querySelector(".modal__form_add");
 
 import {
   PLACES_LIST,
@@ -20,11 +23,11 @@ import {
   MODAL_PROFILE,
   PROFILE_NAME,
   PROFILE_ROLE,
-} from "./constants.js";
+} from "../utils/constants.js";
 
 // photo modal
 const imgModal = new ModalWithImage(MODAL_PHOTO);
-imgModal.setEventListeners();
+// imgModal.setEventListeners();
 
 const onCardClick = (name, url) => {
   imgModal.open(name, url);
@@ -48,11 +51,11 @@ cards.renderItems();
 // Init add card modal
 const addPlaceModal = new ModalWithForm({
   modalSelector: MODAL_ADD,
-  onSubmit: (evt, data) => {
-    evt.preventDefault();
+  onSubmit: (data) => {
     const card = new Card(data, onCardClick);
     cards.prependItem(card.getCard());
   },
+  formValidator: new FormValidator({}, addCardForm),
 });
 
 addPlaceModal.setEventListeners();
@@ -70,11 +73,11 @@ const userInfo = new UserInfo({
 // init profile modal
 const profileModal = new ModalWithForm({
   modalSelector: MODAL_PROFILE,
-  onSubmit: (evt, data) => {
-    evt.preventDefault();
+  onSubmit: (data) => {
     userInfo.setUserInfo(data);
     profileModal.close();
   },
+  formValidator: new FormValidator({}, editProfileForm),
 });
 
 profileModal.setEventListeners();
@@ -86,21 +89,4 @@ profileEditButton.addEventListener("click", () => {
   usernameInput.value = name;
   roleInput.value = role;
   profileModal.open();
-});
-
-// common listeners for close on click
-const modalsList = Array.from(document.querySelectorAll(".modal"));
-
-modalsList.forEach((modal) => {
-  // Don't propagate click from modal window itself
-  const modalContainer = modal.querySelector(".modal__container");
-  modalContainer.addEventListener("mousedown", (evt) => {
-    evt.stopPropagation();
-  });
-
-  // Close modal if clicked outside
-  modal.addEventListener("mousedown", () => {
-    modal.classList.remove("modal_opened");
-    modal.querySelector(".modal__form").reset();
-  });
 });
