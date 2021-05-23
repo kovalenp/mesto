@@ -1,18 +1,23 @@
 export default class UserInfo {
-  constructor({ userNameSelector, roleSelector }) {
-    this._userName = document.querySelector(userNameSelector);
-    this._role = document.querySelector(roleSelector);
+  constructor({ userNameSelector, roleSelector, avatarSelector }) {
+    this._name = document.querySelector(userNameSelector);
+    this._about = document.querySelector(roleSelector);
+    this._avatar = document.querySelector(avatarSelector);
   }
 
   getUserInfo() {
     return {
-      userName: this._userName.textContent,
-      role: this._role.textContent,
+      name: this._name.textContent,
+      about: this._about.textContent,
+      avatar: this._avatar,
+      userId: this._id
     };
   }
 
-  setUserInfo({ username, role }) {
-    this._userName.textContent = username;
-    this._role.textContent = role;
+  setUserInfo({ name, about, avatar, _id }) {
+    if (name) this._name.textContent = name;
+    if (about) this._about.textContent = about;
+    if (avatar) this._avatar.src = avatar;
+    if (_id) this._id = _id;
   }
 }
