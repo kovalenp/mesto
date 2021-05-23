@@ -10,6 +10,7 @@
 @import "../blocks/profile/__add/profile__add.css";
 @import "../blocks/profile/__edit/profile__edit.css";
 @import "../blocks/profile/__avatar/profile__avatar.css";
+@import "../blocks/profile/__avatar-img/profile__avatar-img.css";
 @import "../blocks/profile/__info/profile__info.css";
 @import "../blocks/profile/__name/profile__name.css";
 @import "../blocks/profile/__role/profile__role.css";
@@ -19,6 +20,8 @@
 @import "../blocks/places/__img-container/places__img-container.css";
 @import "../blocks/places/__img/places__img.css";
 @import "../blocks/places/__text-container/places__text-container.css";
+@import "../blocks/places/__like-container/places__like-container.css";
+@import "../blocks/places/__like-counter/places__like-counter.css";
 @import "../blocks/places/__like/places__like.css";
 @import "../blocks/places/__like/_active/places__like_active.css";
 @import "../blocks/places/__delete/places__delete.css";

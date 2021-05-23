@@ -15,3 +15,7 @@
   opacity: 0.6;
   cursor: pointer;
 }
+
+.places__delete:disabled {
+  visibility: hidden;
+}

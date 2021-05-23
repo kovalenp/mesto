@@ -12,14 +12,16 @@
       </header>
       <main>
         <section class="profile">
-          <img
-            src="<%=require('./images/avatar.png')%>"
-            alt="Аватар"
-            class="profile__avatar"
-          />
+          <a class="profile__avatar" href="#" target="_self">
+            <img
+              src="<%=require('./images/avatar-anonymous.png')%>"
+              alt="Аватар"
+              class="profile__avatar-img"
+            />
+          </a>
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <p class="profile__role">Исследователь океана</p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__role">загрузка...</p>
             <button
               class="button profile__edit"
               type="button"
@@ -52,28 +54,28 @@
             <label class="modal__label">
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="name"
+                name="name"
                 class="modal__text-input"
                 placeholder="Имя"
                 minlength="2"
                 maxlength="40"
                 required
               />
-              <span class="modal__text-input-error username-error"></span>
+              <span class="modal__text-input-error name-error"></span>
             </label>
             <label class="modal__label">
               <input
                 type="text"
-                id="role"
-                name="role"
+                id="about"
+                name="about"
                 class="modal__text-input"
                 placeholder="О себе"
                 minlength="2"
                 maxlength="200"
                 required
               />
-              <span class="modal__text-input-error role-error"></span>
+              <span class="modal__text-input-error about-error"></span>
             </label>
             <input
               type="submit"
@@ -83,6 +85,41 @@
           </form>
           <button
             class="button modal__close modal__close_profile"
+            type="button"
+            aria-label="Закрыть"
+          ></button>
+        </div>
+      </div>
+
+      <div class="modal modal_avatar">
+        <div class="modal__container modal__container_form">
+          <h3 class="modal__title">Обновить аватар</h3>
+          <form
+            class="modal__form modal__form_avatar"
+            name="avatar"
+            autocomplete="off"
+            novalidate
+          >
+            <label class="modal__label">
+              <input
+                type="text"
+                id="avatar"
+                pattern="https?://.*"
+                name="avatar"
+                class="modal__text-input"
+                placeholder="Ссылка на картинку"
+                required
+              />
+              <span class="modal__text-input-error avatar-error"></span>
+            </label>
+            <input
+              type="submit"
+              value="Сохранить"
+              class="modal__submit-input"
+            />
+          </form>
+          <button
+            class="button modal__close modal__close_avatar"
             type="button"
             aria-label="Закрыть"
           ></button>
@@ -101,7 +138,7 @@
             <label class="modal__label">
               <input
                 type="text"
-                id="name"
+                id="card-name"
                 name="name"
                 class="modal__text-input"
                 placeholder="Название"
@@ -109,7 +146,7 @@
                 maxlength="30"
                 required
               />
-              <span class="modal__text-input-error name-error"></span>
+              <span class="modal__text-input-error card-name-error"></span>
             </label>
             <label class="modal__label">
               <input
@@ -156,6 +193,25 @@
       </div>
     </div>
 
+    <div class="modal modal_confirm">
+      <div class="modal__container modal__container_form">
+        <h3 class="modal__title">Вы уверены?</h3>
+        <form
+          class="modal__form modal__form_confirm"
+          name="confirm"
+          autocomplete="off"
+          novalidate
+        >
+          <input type="submit" value="Да" class="modal__submit-input" />
+        </form>
+        <button
+          class="button modal__close modal__close_confirm"
+          type="button"
+          aria-label="Да"
+        ></button>
+      </div>
+    </div>
+
     <template id="place-template">
       <li class="places__item">
         <div class="places__img-container">
@@ -172,11 +228,14 @@
         </div>
         <div class="places__text-container">
           <h2 class="places__name"></h2>
-          <button
-            class="places__like button"
-            type="button"
-            aria-label="Кнопка Лайк"
-          ></button>
+          <div class="places__like-container">
+            <button
+              class="places__like button"
+              type="button"
+              aria-label="Кнопка Лайк"
+            ></button>
+            <span class="places__like-counter">0</span>
+          </div>
         </div>
       </li>
     </template>
