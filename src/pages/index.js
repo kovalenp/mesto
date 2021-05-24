@@ -51,9 +51,9 @@ const confirmModal = new ModalConfirmation({
   onSubmit: (card) => {
     api
       .deleteCard(card._id)
-      .then(card.removeCard())
-      .catch((err) => console.error(err))
-      .finally(confirmModal.close());
+      .then(() => card.removeCard())
+      .then(() => confirmModal.close())
+      .catch((err) => console.error(err));
   },
 });
 
@@ -136,10 +136,10 @@ const addPlaceModal = new ModalWithForm({
         const card = createCard(res);
         cards.prependItem(card.getCard());
       })
+      .then(() => addPlaceModal.close())
       .catch((err) => console.error(err))
       .finally(() => {
         addPlaceModal.setLoading(false);
-        addPlaceModal.close();
       });
   },
   formValidator: new FormValidator({}, addCardForm),
@@ -161,10 +161,10 @@ const avatarModal = new ModalWithForm({
       .then((_res) => {
         userInfo.setUserInfo(data);
       })
+      .then(() => avatarModal.close())
       .catch((err) => console.error(err))
       .finally(() => {
         avatarModal.setLoading(false);
-        avatarModal.close();
       });
   },
   formValidator: new FormValidator({}, avatarForm),
@@ -184,10 +184,10 @@ const profileModal = new ModalWithForm({
     api
       .setUserInfo(data)
       .then((res) => userInfo.setUserInfo(res))
+      .then(() => profileModal.close())
       .catch((err) => console.error(err))
       .finally(() => {
         profileModal.setLoading(false);
-        profileModal.close();
       });
   },
   formValidator: new FormValidator({}, editProfileForm),
