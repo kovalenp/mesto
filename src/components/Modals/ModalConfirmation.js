@@ -1,6 +1,6 @@
 import Modal from "./Modal.js";
 
-export default class ModalConformation extends Modal {
+export default class ModalConfirmation extends Modal {
   constructor({ modalSelector, onSubmit }) {
     super(modalSelector);
     this._onSubmit = onSubmit;
@@ -10,7 +10,6 @@ export default class ModalConformation extends Modal {
     this._modal.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._onSubmit(this._data);
-      this.close();
     });
     super.setEventListeners();
   }

@@ -6,8 +6,8 @@ import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
 import ModalWithImage from "../components/Modals/ModalWithImage.js";
 import ModalWithForm from "../components/Modals/ModalWithForm.js";
-import ModalConformation from "../components/Modals/ModalConformation.js";
-import FormValidator from "../validation/FormValidator.js";
+import ModalConfirmation from "../components/Modals/ModalConfirmation.js";
+import FormValidator from "../components/FormValidator.js";
 
 const addCardButton = document.querySelector(".profile__add");
 const editAvatarButton = document.querySelector(".profile__avatar");
@@ -46,13 +46,14 @@ const userInfo = new UserInfo({
 });
 
 //confirm modal
-const confirmModal = new ModalConformation({
+const confirmModal = new ModalConfirmation({
   modalSelector: MODAL_CONFIRM,
   onSubmit: (card) => {
     api
       .deleteCard(card._id)
-      .then(() => card.removeCard())
-      .catch((err) => console.error(err));
+      .then(card.removeCard())
+      .catch((err) => console.error(err))
+      .finally(confirmModal.close());
   },
 });
 
@@ -88,35 +89,36 @@ const onCardLike = (card, isLiked) => {
   }
 };
 
+const createCard = (data) => {
+  const { userId } = userInfo.getUserInfo();
+  return new Card({
+    data,
+    handleCardClick: onCardClick,
+    userId,
+    handleDeleteClick: onCardDelete,
+    handleLike: onCardLike,
+  });
+};
+
+const cards = new Section(
+  {
+    renderer: (data) => {
+      const card = createCard(data);
+      cards.addItem(card.getCard());
+    },
+  },
+  PLACES_LIST
+);
+
 //get user id
 api
   .getUserInfo()
   .then((data) => {
     userInfo.setUserInfo(data);
 
-    const { _id } = data;
-
     // get cards info
     api.getInitialCards().then((res) => {
-      // cards Layout
-      const cards = new Section(
-        {
-          items: res,
-          renderer: (item) => {
-            const card = new Card({
-              data: item,
-              handleCardClick: onCardClick,
-              userId: _id,
-              handleDeleteClick: onCardDelete,
-              handleLike: onCardLike,
-            });
-            cards.addItem(card.getCard());
-          },
-        },
-        PLACES_LIST
-      );
-
-      // render init data
+      cards.setItems(res);
       cards.renderItems();
     });
   })
@@ -131,18 +133,14 @@ const addPlaceModal = new ModalWithForm({
     api
       .addCard({ name: data.name, link: data.link, userId })
       .then((res) => {
-        const card = new Card({
-          data: res,
-          handleCardClick: onCardClick,
-          handleDeleteClick: onCardDelete,
-          userId,
-          handleLike: onCardLike,
-        });
-        const cards = new Section({}, PLACES_LIST);
+        const card = createCard(res);
         cards.prependItem(card.getCard());
       })
       .catch((err) => console.error(err))
-      .finally(addPlaceModal.setLoading(false));
+      .finally(() => {
+        addPlaceModal.setLoading(false);
+        addPlaceModal.close();
+      });
   },
   formValidator: new FormValidator({}, addCardForm),
 });
@@ -164,7 +162,10 @@ const avatarModal = new ModalWithForm({
         userInfo.setUserInfo(data);
       })
       .catch((err) => console.error(err))
-      .finally(avatarModal.setLoading(false));
+      .finally(() => {
+        avatarModal.setLoading(false);
+        avatarModal.close();
+      });
   },
   formValidator: new FormValidator({}, avatarForm),
 });
@@ -183,9 +184,11 @@ const profileModal = new ModalWithForm({
     api
       .setUserInfo(data)
       .then((res) => userInfo.setUserInfo(res))
-      .then(profileModal.close())
       .catch((err) => console.error(err))
-      .finally(profileModal.setLoading(false));
+      .finally(() => {
+        profileModal.setLoading(false);
+        profileModal.close();
+      });
   },
   formValidator: new FormValidator({}, editProfileForm),
 });

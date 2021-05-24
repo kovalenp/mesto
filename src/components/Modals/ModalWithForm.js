@@ -1,12 +1,11 @@
 import Modal from "./Modal.js";
-import { DEFAULT_SUBMIT_SELECTOR } from "../../utils/constants.js";
 
 export default class ModalWithForm extends Modal {
   constructor({ modalSelector, onSubmit, formValidator = null }) {
     super(modalSelector);
     this._inputList = this._modal.querySelectorAll(".modal__text-input");
     this._modalForm = this._modal.querySelector(".modal__form");
-    this._submitButton = this._modalForm.querySelector(DEFAULT_SUBMIT_SELECTOR);
+    this._submitButton = this._modalForm.querySelector(".modal__submit-input");
     this._defaultSubmitButtonValue = this._submitButton.value;
     this._formValidator = formValidator;
     this._onSubmit = onSubmit;
@@ -32,7 +31,6 @@ export default class ModalWithForm extends Modal {
     this._modalForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._onSubmit(this._getInputValues());
-      this.close();
     });
     super.setEventListeners();
   }

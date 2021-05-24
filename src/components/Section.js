@@ -6,7 +6,7 @@ export default class Section {
   }
 
   setItems(items) {
-    this._items = items
+    this._items = items;
   }
 
   renderItems() {

@@ -1,5 +1,3 @@
-import { ESC_KEY } from "../../utils/constants.js";
-
 export default class Modal {
   constructor(modalSelector) {
     this._modal = document.querySelector(modalSelector);
@@ -10,12 +8,15 @@ export default class Modal {
   close() {
     this._modal.classList.remove("modal_opened");
     document.removeEventListener("keyup", this._handleEscClose);
-    this._modalContainer.removeEventListener("mousedown", this._onContainerClick);
+    this._modalContainer.removeEventListener(
+      "mousedown",
+      this._onContainerClick
+    );
     document.removeEventListener("mousedown", this._onOverlayClick);
-  };
+  }
 
   _handleEscClose = (evt) => {
-    if (evt.key === ESC_KEY) {
+    if (evt.key === "Escape") {
       this.close();
     }
   };
@@ -37,5 +38,5 @@ export default class Modal {
 
   setEventListeners() {
     this._closeButton.addEventListener("click", this.close.bind(this));
-  };
+  }
 }

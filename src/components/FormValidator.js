@@ -1,17 +1,12 @@
-import {
-  INPUT_ERROR_CLASS,
-  ERROR_CLASS,
-  DEFAULT_INPUT_SELECTOR,
-  DEFAULT_SUBMIT_SELECTOR,
-} from "../utils/constants.js";
-
 export default class FormValidator {
   constructor(selectors, formElement) {
     this._formElement = formElement;
-    this._inputSelector = selectors.inputSelector || DEFAULT_INPUT_SELECTOR;
-    this._submitSelector = selectors.submitSelector || DEFAULT_SUBMIT_SELECTOR;
-    this._inputErrorClass = selectors.inputErrorClass || INPUT_ERROR_CLASS;
-    this._errorClass = selectors.errorElement || ERROR_CLASS;
+    this._inputSelector = selectors.inputSelector || ".modal__text-input";
+    this._submitSelector = selectors.submitSelector || ".modal__submit-input";
+    this._inputErrorClass =
+      selectors.inputErrorClass || "modal__text-input_error";
+    this._errorClass =
+      selectors.errorElement || "modal__text-input-error_active";
     this._inputList = Array.from(
       this._formElement.querySelectorAll(`${this._inputSelector}`)
     );
@@ -61,7 +56,7 @@ export default class FormValidator {
   }
 
   _setEventListeners = () => {
-    this.toggleButtonState(this._inputList, this._submitElement);
+    this.toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
