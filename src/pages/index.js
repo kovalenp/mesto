@@ -30,7 +30,13 @@ import {
   MODAL_CONFIRM,
 } from "../utils/constants.js";
 
-const api = new Api();
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-24",
+  headers: {
+    authorization: "2c1a2c33-777d-40ba-aa82-2e8cada55ffd",
+    "Content-Type": "application/json",
+  },
+});
 
 // init userInfo container
 const userInfo = new UserInfo({
@@ -135,8 +141,8 @@ const addPlaceModal = new ModalWithForm({
         const cards = new Section({}, PLACES_LIST);
         cards.prependItem(card.getCard());
       })
-      .then(addPlaceModal.setLoading(false))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(addPlaceModal.setLoading(false));
   },
   formValidator: new FormValidator({}, addCardForm),
 });
@@ -157,8 +163,8 @@ const avatarModal = new ModalWithForm({
       .then((_res) => {
         userInfo.setUserInfo(data);
       })
-      .then(avatarModal.setLoading(false))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(avatarModal.setLoading(false));
   },
   formValidator: new FormValidator({}, avatarForm),
 });
@@ -177,9 +183,9 @@ const profileModal = new ModalWithForm({
     api
       .setUserInfo(data)
       .then((res) => userInfo.setUserInfo(res))
-      .then(profileModal.setLoading(false))
       .then(profileModal.close())
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(profileModal.setLoading(false));
   },
   formValidator: new FormValidator({}, editProfileForm),
 });
